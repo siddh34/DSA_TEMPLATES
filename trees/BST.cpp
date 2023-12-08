@@ -63,7 +63,8 @@ Node *remove(Node *root, int data){
             Node *temp = root->right;
             while(temp->left != NULL) temp = temp->left;
             root->data = temp->data;
-            root->right = remove(root->right, temp->data);        }
+            root->right = remove(root->right, temp->data);        
+        }
     }
     return root;
 }
@@ -78,6 +79,23 @@ void printInRange(Node *root, int k1, int k2){
     }
     else if(root->data < k1) printInRange(root->right, k1, k2);
     else printInRange(root->left, k1, k2);
+}
+
+void printRootToLeafPath(Node *root, vector<int> &path){
+    if(root == NULL) return;
+
+    if(root->left == NULL and root->right == NULL){
+        for(int node: path){
+            cout << node << " ";
+        }
+        cout << root->data << endl;
+        return;
+    }
+
+    path.push_back(root->data);
+    printRootToLeafPath(root->left, path);
+    printRootToLeafPath(root->right, path);
+    path.pop_back();
 }
 
 int main() {
@@ -96,7 +114,10 @@ int main() {
     // cout << "After removal, the Tree: ";
     // printInorder(root);
 
-    printInRange(root, 5, 13);
+    // printInRange(root, 5, 13);
+    
+    vector<int> path;
+    printRootToLeafPath(root, path);
 
     return 0;
 }
