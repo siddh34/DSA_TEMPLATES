@@ -39,6 +39,35 @@ bool search(Node *root, int data){
     return search(root->right, data);
 }
 
+Node *remove(Node *root, int data){
+    if(root == NULL) return root;
+
+    if(data < root->data) root->left = remove(root->left, data);
+    else if(data > root->data) root->right = remove(root->right, data);
+    else{
+        if(root->left == NULL and root->right == NULL){
+            delete root;
+            return NULL;
+        }
+        else if(root->left == NULL){
+            Node *temp = root;
+            root = root->right;
+            delete temp;
+        }
+        else if(root->right == NULL){
+            Node *temp = root;
+            root = root->left;
+            delete temp;
+        }
+        else{
+            Node *temp = root->right;
+            while(temp->left != NULL) temp = temp->left;
+            root->data = temp->data;
+            root->right = remove(root->right, temp->data);        }
+    }
+    return root;
+}
+
 int main() {
     //Write your code here
     Node *root = NULL;
@@ -48,7 +77,12 @@ int main() {
         root = insert(root, arr[i]);
     }
 
-    printInorder(root);
+    // removal code testing
+    // cout << "Original Tree: ";
+    // printInorder(root);
+    // root = remove(root, 1);
+    // cout << "After removal, the Tree: ";
+    // printInorder(root);
 
     return 0;
 }
