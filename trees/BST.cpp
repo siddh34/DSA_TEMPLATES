@@ -68,6 +68,18 @@ Node *remove(Node *root, int data){
     return root;
 }
 
+void printInRange(Node *root, int k1, int k2){
+    if(root == NULL) return;
+
+    if(root->data >= k1 and root->data <= k2){
+        printInRange(root->left, k1, k2);
+        cout << root->data << " ";
+        printInRange(root->right, k1, k2);
+    }
+    else if(root->data < k1) printInRange(root->right, k1, k2);
+    else printInRange(root->left, k1, k2);
+}
+
 int main() {
     //Write your code here
     Node *root = NULL;
@@ -83,6 +95,8 @@ int main() {
     // root = remove(root, 1);
     // cout << "After removal, the Tree: ";
     // printInorder(root);
+
+    printInRange(root, 5, 13);
 
     return 0;
 }
