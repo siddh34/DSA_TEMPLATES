@@ -15,7 +15,7 @@ private:
 
     friend bool compare(int a, int b, bool isMinHeap);
 
-    void heapifY(int i){
+    void heapify(int i){
         int left = 2 * i;
         int right = 2 * i + 1;
 
@@ -33,7 +33,7 @@ private:
 
         if(min_idx != i){
             swap(v[i], v[min_idx]);
-            heapifY(min_idx);
+            heapify(min_idx);
         }
     }
 
@@ -67,7 +67,7 @@ public:
         int idx = v.size() - 1;
         swap(v[1], v[idx]);
         v.pop_back();
-        heapifY(1);
+        heapify(1);
     }
 };
 
