@@ -69,5 +69,9 @@ public:
         v.pop_back();
         heapify(1);
     }
+
+    bool empty(){
+        return v.size() == 1;
+    }
 };
 
