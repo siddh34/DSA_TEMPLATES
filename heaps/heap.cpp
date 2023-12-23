@@ -2,7 +2,7 @@
 #include "heap.h"
 using namespace std;
 
-// craeting a custom comparator
+// creating a custom comparator
 
 class Compare{
 public:
