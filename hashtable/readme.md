@@ -9,3 +9,16 @@
 
 * Two values generate the same hash then it causes collision
 * Easiest way is to form a chain then put the same value furthur in chain of it
+
+## Hash for Strings
+
+* ASCII values are added to get a total value
+* h('str') = sum % size of table
+* We can also multiple k a base prime number in sucession
+* Example = `a*27 + b*27*27 + c*27*27*27`
+
+## Open hashing
+
+### Separate Chaining
+
+* Add collisioned element to linkedList
