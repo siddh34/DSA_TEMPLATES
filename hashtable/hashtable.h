@@ -19,7 +19,7 @@ public:
             delete next;
         }
     }
-}
+};
 
 template<typename T>
 class Hashtable{
@@ -32,7 +32,7 @@ private:
         int index = 0;
         int power = 1;
         for(char ch: key){
-            idx = (idx + ch*power) % table_size;
+            index = (index + ch * power) % table_size;
             power = (power*27) % table_size;
         }
         return index;
@@ -88,4 +88,71 @@ public:
             rehash();
         }
     }
-}
+
+    T* search(string key){
+        int index = hashFunction(key);
+        Node<T> * temp = table[index];
+        while(temp != NULL){
+            if(temp->key == key){
+                return &temp->value;
+            }
+            temp = temp->next;
+        }
+        return NULL;
+    }
+
+    bool isPresent(string key){
+        T* value = search(key);
+        if(value == NULL){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+
+    void erase(string key){
+        int index = hashFunction(key);
+        Node<T> * temp = table[index];
+        Node<T> * prev = NULL;
+        while(temp != NULL){
+            if(temp->key == key){
+                if(prev == NULL){
+                    table[index] = temp->next;
+                }
+                else{
+                    prev->next = temp->next;
+                }
+                temp->next = NULL;
+                delete temp;
+                return;
+            }
+            prev = temp;
+            temp = temp->next;
+        }
+    }
+
+    T& operator[](string key){
+        T* value = search(key);
+        if(value == NULL){
+            // Insert key, value(garbage) in the hashmap
+            T garbage;
+            insert(key, garbage);
+            value = search(key);
+        }
+        return *value;
+    }
+
+    void print(){
+        for(int i=0;i<table_size;i++){
+            cout<<"Bucket "<<i<<"->";
+            Node<T> * temp = table[i];
+            while(temp != NULL){
+                cout<<temp->key<<"->";
+                temp = temp->next;
+            }
+            cout<<endl;
+        }
+    }
+};
