@@ -13,5 +13,7 @@ int main() {
     gr.addEdge(2, 3);
     gr.addEdge(3, 5);
     gr.printAdjList();
+    gr.BFS(1);
+    gr.DFS(1);
     return 0;
 }

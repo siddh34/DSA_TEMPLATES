@@ -28,4 +28,38 @@ public:
             cout<<endl;
         }
     }
+
+    void BFS(int source){
+        queue<int> q;
+        bool* visited = new bool[V]{0};
+        q.push(source);
+        visited[source] = true;
+
+        while(!q.empty()){
+            int f = q.front();
+            cout << f << " ";
+            q.pop();
+
+            for(auto nbr: l[f]){
+                if(!visited[nbr]){
+                    q.push(nbr);
+                    visited[nbr] = true;
+                }
+            }
+        }
+
+        cout << endl;
+    }
+
+    void DFS(int source){
+        static bool* visited = new bool[V]{0};
+        cout << source << " ";
+        visited[source] = true;
+
+        for(auto nbr: l[source]){
+            if(!visited[nbr]){
+                DFS(nbr);
+            }
+        }
+    }
 };

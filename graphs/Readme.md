@@ -16,3 +16,7 @@
   * Web crawlers
   * Physics and chemistry
   * graph database
+
+## Topological Sorting
+
+* It is for DAG. It means finding out the right order in which things should be install
