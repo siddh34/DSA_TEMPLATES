@@ -20,3 +20,10 @@
 ## Topological Sorting
 
 * It is for DAG. It means finding out the right order in which things should be install
+
+## Dijikshtra Algorithm
+
+* Shortest path algorithm
+* Single Shortest Path Algorithm
+* It is done by maintaining the set of node & dist
+* While Finalizaing the distances, we remove that node and distance from set
