@@ -62,4 +62,34 @@ public:
             }
         }
     }
+
+    void topological_sort(){
+        vector<int> indegree(V, 0);
+        for(int i=0; i<V; i++){
+            for(auto nbr: l[i]){
+                indegree[nbr]++;
+            }
+        }
+
+        queue<int> q;
+
+        for(int i=0; i<V; i++){
+            if(indegree[i] == 0){
+                q.push(i);
+            }
+        }
+
+        while(!q.empty()){
+            int node = q.front();
+            cout << node << " ";
+            q.pop();
+
+            for(auto nbr: l[node]){
+                indegree[nbr]--;
+                if(indegree[nbr] == 0){
+                    q.push(nbr);
+                }
+            }
+        }
+    }
 };
