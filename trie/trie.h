@@ -56,4 +56,28 @@ public:
 
         return temp->isterminal;
     }
+
+    vector<string> findWords(string prefix){
+        Node *temp = root;
+        vector<string> words;
+        for(char ch: prefix){
+            if(temp->map.count(ch) == 0){
+                return words;
+            }
+            temp = temp->map[ch];
+        }
+
+        findWordsHelper(temp, prefix, words);
+        return words;
+    }
+
+    void findWordsHelper(Node *temp, string prefix, vector<string> &words){
+        if(temp->isterminal){
+            words.push_back(prefix);
+        }
+
+        for(auto it: temp->map){
+            findWordsHelper(it.second, prefix + it.first, words);
+        }
+    }
 };
